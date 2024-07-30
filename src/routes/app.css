@@ -1,0 +1,41 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+/* GENERAL */
+
+
+
+html, body {
+    height: 100%;
+    overflow: hidden;
+    scroll-behavior: smooth;
+    font-family: 'Nunito', sans-serif;
+  }
+
+.contenedor{
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+h1,h2,h3{
+    font-family: 'Poppins', sans-serif;
+}
+
+
+span{
+    font-family: 'Nunito', sans-serif;
+}
+
+.btn-red {
+  color: red;
+}
