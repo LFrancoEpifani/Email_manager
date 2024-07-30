@@ -8,7 +8,7 @@
   export let data;
   let tableElement;
 
-  function sortEmailsByDate(emails) {
+  function sortEmailsDate(emails) {
     return emails.sort((a, b) => new Date(b.emlDate) - new Date(a.emlDate));
   }
 
@@ -29,7 +29,7 @@
     return emails.length;
   }
 
-  let sortedEmails = sortEmailsByDate(data.data);
+  let sortedEmails = sortEmailsDate(data.data);
   let totalEmails = countEmails(data.data);
 
   function toggleEmailSelection(id) {
