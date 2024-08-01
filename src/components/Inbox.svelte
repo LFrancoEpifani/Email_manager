@@ -12,7 +12,6 @@
     try {
       const response = await fetch(`/api/notes?emailId=${emailId}`);
       const result = await response.json();
-      console.log(`Fetched notes for emailId ${emailId}:`, result.notes);
       notes = {
         ...notes,
         [emailId]: result.notes || []
@@ -26,34 +25,25 @@
     try {
       const response = await fetch('/api/notes', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ emailId, note })
       });
       const result = await response.json();
-      console.log(`Respuesta al añadir nota a emailId ${emailId}:`, result);
       if (result.success) {
         notes = {
           ...notes,
           [emailId]: [...(notes[emailId] || []), result.note]
         };
-        console.log(`Notas actualizadas para emailId ${emailId}:`, notes[emailId]);
-      } else {
-        console.error(`Error en la respuesta al añadir nota:`, result.error);
       }
     } catch (error) {
-      console.error(`Error al añadir nota a emailId ${emailId}:`, error);
+      console.error(`Error adding note to emailId ${emailId}:`, error);
     }
   }
 
   async function deleteNoteFromEmail(emailId, noteId) {
     try {
-      const response = await fetch(`/api/notes?noteId=${noteId}`, {
-        method: 'DELETE'
-      });
+      const response = await fetch(`/api/notes?noteId=${noteId}`, { method: 'DELETE' });
       const result = await response.json();
-      console.log(`Deleted note from emailId ${emailId}:`, result);
       if (result.success) {
         notes = {
           ...notes,
@@ -71,49 +61,30 @@
 
   function formatDate(dateStr) {
     const date = new Date(dateStr);
-    if (isToday(date)) {
-      return `Today ${format(date, 'HH:mm')}`;
-    } else if (isYesterday(date)) {
-      return `Yesterday ${format(date, 'HH:mm')}`;
-    } else if (isThisWeek(date)) {
-      return format(date, 'EEEE HH:mm');
-    } else {
-      return format(date, 'MMM dd');
-    }
-  }
-
-  function countEmails(emails) {
-    return emails.length;
+    if (isToday(date)) return `Today ${format(date, 'HH:mm')}`;
+    if (isYesterday(date)) return `Yesterday ${format(date, 'HH:mm')}`;
+    if (isThisWeek(date)) return format(date, 'EEEE HH:mm');
+    return format(date, 'MMM dd');
   }
 
   let sortedEmails = sortEmailsDate(data.data);
-  let totalEmails = countEmails(data.data);
+  let totalEmails = data.data.length;
 
   function toggleEmailSelection(id) {
-    selectedEmails.update(selected => {
-      if (selected.includes(id)) {
-        return selected.filter(emailId => emailId !== id);
-      } else {
-        return [...selected, id];
-      }
-    });
+    selectedEmails.update(selected => selected.includes(id) ? selected.filter(emailId => emailId !== id) : [...selected, id]);
   }
 
   $: selectedEmailIds = $selectedEmails;
 
   onMount(() => {
-    if (tableElement) {
-      tableElement.classList.remove('hidden');
-    }
-    sortedEmails.forEach(email => {
-      fetchNotes(email.id);
-    });
+    if (tableElement) tableElement.classList.remove('hidden');
+    sortedEmails.forEach(email => fetchNotes(email.id));
   });
 </script>
 
-<main class="h-full w-full">
+<main class="h-full w-full shadow-xl">
   <div class="overflow-y-auto h-full w-full">
-    <table class="bg-white dark:bg-[#08243f] w-full hidden" bind:this={tableElement}>
+    <table class="bg-white dark:bg-[#08243f] w-full hidden rounded-lg " bind:this={tableElement}>
       <thead class="text-black dark:text-white border-b">
         <tr class="text-xl">
           <th class="w-2/12 p-4 text-left">From</th>
@@ -140,7 +111,7 @@
                 {#if notes[email.id]}
                   {#each notes[email.id] as note (note.id)}
                     <li class="flex m-3 gap-3">
-                     <p> {note.note}</p>
+                      <p>{note.note}</p>
                       <button on:click={() => deleteNoteFromEmail(email.id, note.id)}>
                         <i class="fa-solid fa-trash cursor-pointer"></i>
                       </button>
@@ -150,7 +121,7 @@
               </ul>
             </td>
             <td class="px-4 py-2">
-              <div class="flex gap-2 text-lg items-center">
+              <div class="flex gap-2 text-xl items-center">
                 <button class:btn-red={selectedEmailIds.includes(email.id)} on:click={() => toggleEmailSelection(email.id)}>
                   <i class="fa-solid fa-flag cursor-pointer"></i>
                 </button>
@@ -165,5 +136,3 @@
     </table>
   </div>
 </main>
-
-

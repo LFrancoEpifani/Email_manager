@@ -1,9 +1,8 @@
 <script>
   import Header from '../components/Header.svelte';
   import Inbox from '../components/Inbox.svelte';
-import { theme } from '../store/store.js';
+  import { theme } from '../store/store.js';
   import { onMount } from 'svelte';
-
 
   export let data;
 
@@ -28,9 +27,9 @@ import { theme } from '../store/store.js';
   }
 </script>
 
-<main class="min-h-screen bg-white dark:bg-[#08243f] text-black dark:text-white">
+<main class="min-h-screen bg-[#f3f3f3] dark:bg-[#0a2b4b] text-black dark:text-white contenedor">
   <Header/>
-  <section class="p-4">
+  <section class="p-4 h-full">
     <Inbox {data} />
   </section>
 </main>
