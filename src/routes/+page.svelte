@@ -7,7 +7,6 @@ import { theme } from '../store/store.js';
 
   export let data;
 
-  // Asegurarse de aplicar el tema al montar el componente
   onMount(() => {
     if (typeof document !== 'undefined') {
       if ($theme === 'dark') {
@@ -18,7 +17,6 @@ import { theme } from '../store/store.js';
     }
   });
 
-  // Escuchar los cambios en el tema para actualizar la clase
   $: {
     if (typeof document !== 'undefined') {
       if ($theme === 'dark') {
