@@ -1,47 +1,56 @@
 <script>
-    import { theme } from '../store/store.js';
-   
+  import { theme } from '../store/store.js';
   
-  
-    function toggleTheme() {
-      theme.update(current => current === 'light' ? 'dark' : 'light');
-    }
-  
-    
-  </script>
-  
-  <header class="border-b border-gray-300 shadow-md">
-    <div class="flex justify-between items-center p-2">
-      <button class="text-[28px] px-2 py-2">
-        Email Manager
-      </button>
-      <form class="w-[500px]">
-        <label for="default-search" class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
-        <div class="relative">
-          <div class="absolute inset-y-0 start-0 flex items-center ps-5 pointer-events-none">
-            <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
-              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
-            </svg>
+  function toggleTheme() {
+    theme.update(current => current === 'light' ? 'dark' : 'light');
+  }
+</script>
+
+<header class="bg-white dark:bg-gray-800 shadow-md">
+  <div class="flex justify-between items-center p-4">
+    <button class="text-2xl font-bold text-gray-900 dark:text-white px-4 py-2 focus:outline-none">
+      Email Manager
+    </button>
+    <form class="w-[800px]">
+      <div class="flex">
+        <div class="relative w-full max-w-2xl mr-4">
+          <div class="absolute inset-y-0 left-0 flex items-center pl-4 pointer-events-none">
+            <i class="fa-solid fa-magnifying-glass text-gray-600"></i>
           </div>
-          <input type="search" id="default-search" class="block w-full p-2 ps-12 text-[18px] text-gray-900 border border-gray-300 rounded-full bg-gray-200" placeholder="Search..." required />
+          <input 
+            type="search" 
+            id="default-search" 
+            class="w-full py-3 pl-12 text-lg text-gray-900 border border-gray-300 rounded-lg bg-transparent dark:text-white dark:border-gray-700 dark:bg-gray-800 focus:outline-none" 
+            placeholder="Search..." 
+            required
+          />
         </div>
-      </form>
-  
-   
-      <div class="flex gap-2 p-2 items-center">
-          <button on:click={toggleTheme} class="text-[24px]">
-            {#if $theme === 'light'}
-              <i class="fa-solid fa-sun"></i>
-            {:else}
-              <i class="fa-solid fa-moon"></i>
-            {/if}
+        <div class="relative">
+          <button class="flex items-center justify-between gap-2 w-full py-3 text-lg text-gray-900 border border-gray-300 rounded-lg px-4 bg-transparent dark:text-white dark:border-gray-700 dark:bg-gray-800 focus:outline-none">
+            <span>Filter</span>
+            <i class="fa-solid fa-angle-down"></i>
           </button>
-          <button class="text-[32px]">
-            <i class="fa-solid fa-user-circle"></i>
-        </button>
         </div>
       </div>
-  </header>
-  
-
-  
+    </form>
+    <div class="flex gap-4 items-center">
+      <button 
+        on:click={toggleTheme} 
+        class="text-2xl text-gray-900 dark:text-white focus:outline-none"
+        aria-label="Toggle Theme"
+      >
+        {#if $theme === 'light'}
+          <i class="fa-solid fa-sun"></i>
+        {:else}
+          <i class="fa-solid fa-moon"></i>
+        {/if}
+      </button>
+      <button 
+        class="text-2xl text-gray-900 dark:text-white focus:outline-none"
+        aria-label="User Profile"
+      >
+        <i class="fa-solid fa-user-circle"></i>
+      </button>
+    </div>
+  </div>
+</header>
