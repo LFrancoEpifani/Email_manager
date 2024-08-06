@@ -24,7 +24,6 @@ export async function POST({ request }) {
           }
         }));
       } else {
-        console.log(`Script stdout: ${stdout}`);
         resolve(new Response(JSON.stringify({ message: 'Script executed successfully' }), {
           status: 200,
           headers: {
