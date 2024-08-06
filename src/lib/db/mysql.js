@@ -1,14 +1,14 @@
-import mysql from "mysql2/promise";
+import mysql from 'mysql2/promise';
 
 let mysqlconn = null;
 
-export function mysqlconnFn() {
+export async function mysqlconnFn() {
   if (!mysqlconn) {
-    mysqlconn = mysql.createConnection({
-      host: "localhost",
-      user: "root",
-      password: "admin",
-      database: "mailparser",
+    mysqlconn = await mysql.createConnection({
+      host: process.env.DB_HOST || 'localhost',
+      user: process.env.DB_USER || 'root',
+      password: process.env.DB_PASSWORD || 'admin',
+      database: process.env.DB_NAME || 'mailparser',
     });
   }
 
