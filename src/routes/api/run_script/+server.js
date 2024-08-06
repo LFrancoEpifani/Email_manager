@@ -16,7 +16,6 @@ export async function POST({ request }) {
           }
         }));
       } else if (stderr) {
-        console.error(`Script stderr: ${stderr}`);
         resolve(new Response(JSON.stringify({ message: 'An error occurred' }), {
           status: 500,
           headers: {

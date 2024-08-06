@@ -76,7 +76,7 @@
       Forwarded: 'bg-[#75C9A1] text-[#2B8E28] border-[#DCF7E9]',
       Registration: 'bg-[#FFDDCC] text-[#D47528] border-[#F3B180]'
     };
-    return styles[tag] || 'bg-gray-300 text-black border-gray-500'; // default style
+    return styles[tag] || 'bg-gray-300 text-black border-gray-500'; 
   }
 
   let sortedEmails = sortEmailsDate(data.data);
