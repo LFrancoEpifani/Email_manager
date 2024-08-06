@@ -62,7 +62,7 @@ $: {
 }
 </script>
 
-<main class="contenedor bg-white dark:bg-[#1f2937] text-black dark:text-white">
+<main class="contenedor bg-white dark:bg-[#222222] text-black dark:text-white">
   <Header />
   <section class="inbox-container flex-grow overflow-hidden p-3">
     {#if errorMessage}

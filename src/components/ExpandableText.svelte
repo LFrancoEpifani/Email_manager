@@ -18,7 +18,7 @@
         {/if}
       </div>
       {#if text.length > maxLength}
-        <button class="text-[#2848BA] dark:text-[#F7E7DC]" on:click={toggleExpand}>
+        <button class="text-[#2848BA] dark:text-[#1E88E5]" on:click={toggleExpand}>
           {isExpanded ? 'Show less' : 'Show more'}
         </button>
       {/if}

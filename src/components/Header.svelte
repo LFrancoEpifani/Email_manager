@@ -22,7 +22,7 @@
   $: tagFilter = $page.url.searchParams.get('tagFilter') || '';
 </script>
 
-<header class="bg-white dark:bg-gray-800 shadow-md">
+<header class="bg-white dark:bg-[#222222] shadow-md">
   <div class="flex justify-between items-center p-4">
     <button class="text-2xl font-bold text-gray-900 dark:text-white px-4 py-2 focus:outline-none">
    <a href="/">Email Manager</a>
@@ -36,18 +36,18 @@
           <input 
             type="search" 
             id="default-search" 
-            class="w-full py-3 pl-12 text-lg text-gray-900 border border-gray-300 rounded-lg bg-transparent dark:text-white dark:border-gray-700 dark:bg-gray-800 focus:outline-none" 
+            class="w-full py-3 pl-12 text-lg text-gray-900 border border-[#E1E1E1] rounded-lg bg-transparent dark:text-white dark:border-gray-700 dark:bg-gray-800 focus:outline-none" 
             placeholder="Search..." 
             required
           />
         </div>
         <div class="relative">
-          <button type="button" on:click={() => showDropdown = !showDropdown} class="flex items-center justify-between gap-2 w-[150px] py-3 text-lg text-gray-900 border border-gray-300 rounded-lg px-4 bg-transparent dark:text-white dark:border-gray-700 dark:bg-gray-800 focus:outline-none">
+          <button type="button" on:click={() => showDropdown = !showDropdown} class="flex items-center justify-between gap-2 w-[150px] py-3 text-lg text-gray-900 border border-[#E1E1E1] rounded-lg px-4 bg-transparent dark:text-white dark:border-gray-700 dark:bg-gray-800 focus:outline-none">
             <span>Filter</span>
             <i class="fa-solid fa-angle-down"></i>
           </button>
           {#if showDropdown}
-            <ul class="absolute mt-1 w-full bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded-lg shadow-lg">
+            <ul class="absolute mt-1 w-full bg-white dark:bg-gray-800 border border-[#E1E1E1] dark:border-gray-700 rounded-lg shadow-lg">
               <li>
                 <button type="button" on:click={() => applyFilter('')} class="block text-lg w-full text-center px-4 py-3 hover:bg-gray-100 dark:hover:bg-gray-700">All tags</button>
               </li>
