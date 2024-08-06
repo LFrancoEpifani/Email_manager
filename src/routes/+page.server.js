@@ -1,5 +1,6 @@
 import { mysqlconnFn } from "$lib/db/mysql";
 
+// Función para cargar los emails
 export async function load({ url }) {
   let mysqlconn = await mysqlconnFn();
   let tagFilter = url.searchParams.get('tagFilter');

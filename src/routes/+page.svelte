@@ -4,6 +4,7 @@
   import { theme } from '../store/store.js';
   import { onMount } from 'svelte';
   import { fetchEmails } from '$lib/api';
+  
 
   let emails = [];
   let errorMessage = '';
