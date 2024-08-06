@@ -1,11 +1,11 @@
-import { mysqlconnFn } from '$lib/db/mysql';
-import 'dotenv/config';
+import { mysqlconnFn } from "$lib/db/mysql";
 
+// Función para cargar los emails
 export async function load({ url }) {
-  const mysqlconn = await mysqlconnFn();
-  const tagFilter = url.searchParams.get('tagFilter');
-  let queryStr = "SELECT * FROM email"; // Aquí puedes especificar las columnas que necesitas
-  const params = [];
+  let mysqlconn = await mysqlconnFn();
+  let tagFilter = url.searchParams.get('tagFilter');
+  let queryStr = "SELECT * FROM email";
+  let params = [];
 
   if (tagFilter) {
     queryStr += " WHERE FIND_IN_SET(?, manualTags)";
@@ -13,9 +13,12 @@ export async function load({ url }) {
   }
 
   try {
-    const [rows] = await mysqlconn.query(queryStr, params);
+    let results = await mysqlconn.query(queryStr, params).then(function ([rows, fields]) {
+      return rows;
+    });
+
     return {
-      emails: rows,
+      data: results,
     };
   } catch (error) {
     console.error("Got an error!!!");

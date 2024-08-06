@@ -3,50 +3,72 @@
   import Inbox from '../components/Inbox.svelte';
   import { theme } from '../store/store.js';
   import { onMount } from 'svelte';
+  import { fetchEmails } from '$lib/api';
 
-  export let emails = [];
+  let emails = [];
   let errorMessage = '';
 
-  async function handleAnalyzeEmails() {
-    try {
-      const response = await fetch('/api/run_script', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ scriptName: 'analyze_emails.py' })
-      });
+  export let data;
 
-      const result = await response.json();
+  onMount(async () => {
+  try {
+    emails = await fetchEmails();
+    data = emails;
+  } catch (error) {
+    errorMessage = error.message;
+  }
+});
 
-      if (response.ok) {
-        window.location.reload(); 
-      } else {
-        errorMessage = result.message;
-      }
-    } catch (error) {
-      errorMessage = error.message;
+async function handleAnalyzeEmails() {
+  try {
+    const response = await fetch('/api/run_script', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ scriptName: 'analyze_emails.py' })
+    });
+
+    const result = await response.json();
+
+    if (response.ok) {
+      window.location.reload(); 
+    } else {
+      errorMessage = result.message;
+    }
+  } catch (error) {
+    errorMessage = error.message;
+  }
+}
+
+onMount(() => {
+  if (typeof document !== 'undefined') {
+    if ($theme === 'dark') {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
     }
   }
+});
 
-  onMount(() => {
-    if (typeof document !== 'undefined') {
-      if ($theme === 'dark') {
-        document.documentElement.classList.add('dark');
-      } else {
-        document.documentElement.classList.remove('dark');
-      }
+$: {
+  if (typeof document !== 'undefined') {
+    if ($theme === 'dark') {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
     }
-  });
+  }
+}
 </script>
 
-<main class="contenedor bg-white dark:bg-[#222222] text-black dark:text-white">
+<main class="contenedor bg-white dark:bg-[#1f2937] text-black dark:text-white">
   <Header />
   <section class="inbox-container flex-grow overflow-hidden p-3">
     {#if errorMessage}
       <p class="error-message">{errorMessage}</p>
     {/if}
-    <Inbox {emails} {handleAnalyzeEmails}/>
+    <Inbox {data} {handleAnalyzeEmails}/>
   </section>
 </main>
 

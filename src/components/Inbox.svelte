@@ -96,8 +96,8 @@
 
 <main class="h-full w-full overflow-hidden">
   <div class="overflow-y-auto h-full w-full">
-    <table class="bg-white dark:bg-[#222222] w-full hidden rounded-lg" bind:this={tableElement}>
-      <thead class="text-black dark:text-[#e0e0e0] border-b">
+    <table class="bg-white dark:bg-gray-800 w-full hidden rounded-lg" bind:this={tableElement}>
+      <thead class="text-black dark:text-white border-b">
         <tr class="text-xl">
           <th class="w-2/12 p-4 text-left">From</th>
           <th class="w-5/12 p-4 text-left">Subject</th>
@@ -107,12 +107,12 @@
           <th class="w-1/12 p-4 text-left">Notes</th>
         </tr>
       </thead>
-      <tbody class="text-gray-700 dark:text-[#e0e0e0]">
+      <tbody class="text-gray-700 dark:text-white">
         {#each sortedEmails as email}
           <tr class="border-b border-gray-200 hover:bg-gray-100 hover:dark:bg-gray-700">
-            <td class="px-4 py-2 text-lg font-medium text-[#333333] dark:text-[#e0e0e0]">{email.emlFrom}</td>
-            <td class="px-4 py-2 text-xl font-semibold text-[#007BFF] dark:text-[#1E88E5]">{email.emlSubject}</td>
-            <td class="px-4 py-2 text-lg text-[#a0a0a0]">
+            <td class="px-4 py-2 text-lg font-medium">{email.emlFrom}</td>
+            <td class="px-4 py-2 text-xl font-semibold text-blue-600">{email.emlSubject}</td>
+            <td class="px-4 py-2 text-lg">
               <ExpandableText text={email.automaticComments} maxLength={35} />
             </td>
             <td class="px-4 py-2">
